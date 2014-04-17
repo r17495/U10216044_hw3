@@ -12,19 +12,25 @@ public class U10216044_hw3 extends JFrame {
   private JButton jbtCalculate = new JButton("Calculate!");
 
   public U10216044_hw3() {
-    JPanel p1 = new JPanel(new GridLayout(5, 2));
+    //A panel allow user to input 
+    JPanel p1 = new JPanel(new GridLayout(5, 3));
     p1.add(new JLabel("Name:"));
     p1.add(jtfName);
+    p1.add(new JLabel(""));
     p1.add(new JLabel("Age:"));
     p1.add(jtfAge);
+    p1.add(new JLabel("years old"));
     p1.add(new JLabel("Weight:"));
     p1.add(jtfWeight);
+    p1.add(new JLabel("pounds"));
     p1.add(new JLabel("Height:"));
     p1.add(jtfHeight);
+    p1.add(new JLabel("inches"));
     p1.add(new JLabel("BMI:"));
     p1.add(jtfBMI);
     p1.setBorder(new TitledBorder("Enter the following informaintion to calculate BMI"));
 
+    //A panel for the button "Calculate!"
     JPanel p2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     p2.add(jbtCalculate);
 
