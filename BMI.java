@@ -1,53 +1,61 @@
-public class BMI {
-  private String name;
-  private int age;
-  private double weight; // in pounds
-  private double height; // in inches
-  public static final double KILOGRAMS_PER_POUND = 0.45359237; 
-  public static final double METERS_PER_INCH = 0.0254;  
-  
-  public BMI(String name, int age, double weight, double height) {
-    this.name = name;
-    this.age = age;
-    this.weight = weight;
-    this.height = height;
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.*;
+
+public class U10216044_hw3 extends JFrame {
+  private JTextField jtfName = new JTextField();
+  private JTextField jtfAge = new JTextField();
+  private JTextField jtfWeight = new JTextField();
+  private JTextField jtfHeight = new JTextField();
+  private JTextField jtfBMI = new JTextField();
+  private JButton jbtCalculate = new JButton("Calculate!");
+
+  public U10216044_hw3() {
+    JPanel p1 = new JPanel(new GridLayout(5, 3));
+    //The panel user can input
+    p1.add(new JLabel("Name:"));
+    p1.add(jtfName);
+    p1.add(new JLabel(""));
+    p1.add(new JLabel("Age:"));
+    p1.add(jtfAge);
+    p1.add(new JLabel("years old"));
+    p1.add(new JLabel("Weight:"));
+    p1.add(jtfWeight);
+    p1.add(new JLabel("pounds"));
+    p1.add(new JLabel("Height:"));
+    p1.add(jtfHeight);
+    p1.add(new JLabel("inches"));
+    p1.add(new JLabel("BMI:"));
+    p1.add(jtfBMI);
+    p1.setBorder(new TitledBorder("Enter the following informaintion to calculate BMI"));
+
+    //The panel for the button "Calculate!"
+    JPanel p2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    p2.add(jbtCalculate);
+
+    add(p1, BorderLayout.CENTER);
+    add(p2, BorderLayout.SOUTH);
+
+    jbtCalculate.addActionListener(new ButtonListener());
   }
-  
-  public BMI(String name, double weight, double height) {
-    this(name, 20, weight, height);
+  private class ButtonListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      String name = jtfName.getText();
+      int age = Integer.parseInt(jtfAge.getText());
+      double weight = Double.parseDouble(jtfWeight.getText());
+      double height = Double.parseDouble(jtfHeight.getText());
+      BMI bmi = new BMI(name, age, weight, height);
+      jtfBMI.setText(String.format("%s's BMI is %.2f %s", bmi.getName(), bmi.getBMI(), bmi.getStatus()));
+    }
   }
-  
-  public double getBMI() {
-    double bmi = weight * KILOGRAMS_PER_POUND / 
-      ((height * METERS_PER_INCH) * (height * METERS_PER_INCH));
-    return Math.round(bmi * 100) / 100.0;
-  }
-  
-  public String getStatus() {
-    double bmi = getBMI();
-    if (bmi < 18.5)
-      return "Underweight";
-    else if (bmi < 25)
-      return "Normal";
-    else if (bmi < 30)
-      return "Overweight";
-    else
-      return "Obese";
-  }
-  
-  public String getName() {
-    return name;
-  }
-  
-  public int getAge() {
-    return age;
-  }
-  
-  public double getWeight() {
-    return weight;
-  }
-  
-  public double getHeight() {
-    return height;
-  }
+  public static void main(String[] args) {
+    JFrame frame = new U10216044_hw3();
+    frame.setTitle("BMI Calculater");
+    frame.setSize(350, 250);
+    frame.setLocationRelativeTo(null);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setVisible(true);
+  }  
 }
